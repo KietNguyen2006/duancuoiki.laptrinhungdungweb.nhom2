@@ -1,0 +1,33 @@
+name: ASP.NET Core CI
+
+on:
+  push:
+    branches: [ main ] # Kích hoạt workflow khi có push code lên nhánh main
+  pull_request:
+    branches: [ main ] # Kích hoạt workflow khi có pull request đến nhánh main
+
+jobs:
+  build-and-test: # Tên của job
+    runs-on: ubuntu-latest # Chọn runner là máy ảo Ubuntu mới nhất
+
+    steps:
+    - name: Checkout code # Step 1: Lấy mã nguồn từ repository
+      uses: actions/checkout@v4 # Sử dụng action có sẵn để checkout code
+
+    - name: Setup .NET # Step 2: Cài đặt môi trường .NET SDK
+      uses: actions/setup-dotnet@v4 # Sử dụng action có sẵn để setup .NET
+      with:
+        dotnet-version: '8.0.x' # Chỉ định phiên bản .NET SDK (hoặc phiên bản phù hợp với dự án của bạn)
+        #dotnet-version: '6.0.x' # Ví dụ cho .NET 6
+
+    - name: Restore dependencies # Step 3: Restore các package NuGet
+      run: dotnet restore
+
+    - name: Build project # Step 4: Build ứng dụng
+      run: dotnet build --configuration Release --no-restore # --no-restore vì đã chạy restore ở trên
+
+    - name: Run tests # Step 5: Chạy các bài kiểm thử
+      run: dotnet test --no-build --verbosity normal # --no-build vì đã build ở trên
+      # Đảm bảo dự án test của bạn có chứa các test cases (xUnit, NUnit, MSTest)
+      JWT_SECRET: ${{ secrets.Nguyenxuananhkiet15052006@1234567890 }} # Thêm biến môi trường JWT_SECRET từ secrets của GitHub
+      ConnectionStrings__DefaultConnection: ${{ secrets.Server=ASPIRE-5-GAMING\\SQLEXPRESS;Database=QuanLySinhVien;Trusted_Connection=True;Encrypt=False;TrustServerCertificate=True; }}
