@@ -43,7 +43,7 @@ builder.Services.AddSingleton<AccountRepository>();
 builder.Services.AddControllers();
 
 // JWT Authentication configuration
-var key = Encoding.ASCII.GetBytes("Nguyenxuananhkiet15052006@1234567890"); 
+var key = Encoding.ASCII.GetBytes("Nguyenxuananhkiet15052006@1234567890");
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = "JwtBearer";
@@ -62,6 +62,10 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
+
 var app = builder.Build();
 
 app.UseSwagger();
@@ -76,7 +80,5 @@ if (!string.IsNullOrEmpty(port))
     app.Urls.Add($"http://*:{port}");
 }
 
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
 
 app.Run();
