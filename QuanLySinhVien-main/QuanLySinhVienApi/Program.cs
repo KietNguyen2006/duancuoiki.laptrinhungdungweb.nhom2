@@ -75,4 +75,8 @@ if (!string.IsNullOrEmpty(port))
 {
     app.Urls.Add($"http://*:{port}");
 }
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 app.Run();

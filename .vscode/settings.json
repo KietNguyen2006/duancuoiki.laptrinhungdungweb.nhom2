@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/0133840c-8d2b-4509-a4d9-6560f2440c36/resourceGroups/quanlysinvien/providers/Microsoft.Web/sites/quanlysinhvien",
+    "appService.deploySubpath": "QuanLySinhVien-main"
+}
